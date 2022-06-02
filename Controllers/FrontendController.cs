@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ASPNetCoreInventory.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,6 +38,39 @@ namespace ASPNetCoreInventory.Controllers
         [HttpGet]
         public ActionResult Register()
         {
+            return View();
+        }
+        [HttpGet]
+        public ActionResult Registeruser()
+        {
+            return View();
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Registeruser(User user)
+        {
+            if(ModelState.IsValid)
+            {
+                using (ASPInventorySonyContext db = new ASPInventorySonyContext())
+
+                {
+
+                    db.Users.Add(user);
+
+                    db.SaveChanges();
+
+
+
+                    ModelState.Clear();
+
+                }
+
+            }
+            else
+            {
+
+            }
+
             return View();
         }
 
